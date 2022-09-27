@@ -7,7 +7,7 @@
 -- Bin 4: 51-75 streams
 -- Bin 5: 76-100 streams
 -- Bin 6: More than 100 streams
-CREATE VIEW binned_score AS
+ALTER VIEW binned_score AS
 WITH n_stream_data (track_name, artist_name, num_stream) AS (
 	SELECT trackName, artistName, COUNT(*) FROM combined_data
 	GROUP BY both_id
@@ -33,3 +33,15 @@ INNER JOIN overall_score o ON o.trackName = n.track_name AND o.artistName = n.ar
 ORDER BY score DESC;
 
 SELECT * FROM binned_score;
+
+-- View the top 10 songs in each bin (If any ties, show all)
+ALTER VIEW top_10_per_bin AS
+WITH bin_score_ranks AS (
+	SELECT *, RANK() OVER (PARTITION BY bins ORDER BY score DESC) AS score_rank
+	FROM binned_score
+)
+SELECT * FROM bin_score_ranks
+WHERE score_rank <= 10
+ORDER BY bins DESC, score_rank;
+
+SELECT * FROM top_10_per_bin;

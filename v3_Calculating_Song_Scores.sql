@@ -33,7 +33,7 @@ SELECT * FROM num_stream_data;
 -- N_30: # skips before 30s (30,000ms)
 -- N_90: # skips before 90s (90,000ms)
 ALTER VIEW skip_score_data AS
-WITH skip_rank_data (both_id, track_name, artist_name, msPlayed, duration, num_stream, n_10, n_30, n_90) AS (
+WITH skip_rank_data (both_id, track_name, artist_name, msPlayed, duration, num_stream, n_10, n_30, n_90, n_skipped, skip_tracker) AS (
 	SELECT c.both_id,
 		   c.trackName, 
 		   c.artistName,
@@ -42,7 +42,14 @@ WITH skip_rank_data (both_id, track_name, artist_name, msPlayed, duration, num_s
 		   COUNT(*) AS num_stream,
 		   SUM(CASE WHEN c.msPlayed < 10000 THEN 1 ELSE 0 END),
 		   SUM(CASE WHEN c.msPlayed < 30000 THEN 1 ELSE 0 END),
-		   SUM(CASE WHEN c.msPlayed < 90000 THEN 1 ELSE 0 END)
+		   SUM(CASE WHEN c.msPlayed < 90000 THEN 1 ELSE 0 END),
+           SUM(CASE WHEN c.msPlayed < (t.duration - 10000) THEN 1 ELSE 0 END),
+           SUM(CASE
+					WHEN c.msPlayed < 10000 THEN 3
+                    WHEN c.msPlayed < 30000 THEN 2
+                    WHEN c.msPlayed < t.duration - 10000 THEN 1
+                    ELSE 0
+				END)
 	FROM combined_data c
 	INNER JOIN track_data t ON c.both_id = t.both_id AND t.duration > 0 AND c.msPlayed <= t.duration
 	GROUP BY c.both_id
@@ -54,8 +61,9 @@ SELECT both_id,
 	   ROUND(n_10/num_stream * 100, 2) AS perc_skip_10,
 	   ROUND(n_30/num_stream * 100, 2) AS perc_skip_30,
 	   ROUND(n_90/num_stream * 100, 2) AS perc_skip_90,
-	   ROUND(num_stream / (1 + (n_10) + (n_30 * 2) + (n_90 * 3)) * 100, 2) AS skip_score,
-       ROUND(CUME_DIST() OVER (ORDER BY num_stream / (1 + (n_10) + (n_30 * 2) + (n_90 * 3))) * 100, 2) AS skip_cume_dist
+       ROUND(n_skipped/num_stream * 100, 2) AS perc_skipped,
+	   ROUND((num_stream - skip_tracker)/num_stream * 100, 2) AS skip_score,
+       ROUND(CUME_DIST() OVER (ORDER BY (num_stream - skip_tracker)/num_stream) * 100, 2) AS skip_cume_dist
 FROM skip_rank_data
 ORDER BY skip_cume_dist DESC;
 
