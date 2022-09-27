@@ -20,7 +20,7 @@ The dataset Spotify returns when the user's last year's listening history is req
 >**msPlayed**: The streamtime of the track (in ms)
 
 <p align="center">
-    <img src="images\Spotify_year_data_screenshot.png" height="300"><br>
+    <img src="images\Spotify_year_data_screenshot.PNG" height="300"><br>
     <em>Example data from the JSON file(s)</em>
 </p>
 <br>
@@ -35,7 +35,7 @@ The overall lack of data limited the scope of this project, but I came up with a
     * I combined the artist and track names into a separate column to act as IDs to differentiate these instances
 
 <p align="center">
-    <img src="images\Unwrapped_results.png" height="500"><br>
+    <img src="images\Unwrapped_results.PNG" height="500"><br>
     <img src="images\Spotify_year_data_tracksByNumStream.png" height="300">
 </p>
 <p align="center">
@@ -62,7 +62,7 @@ As can be seen in the chart, the vast majority of tracks were streamed less than
 >**Bin 6**: Songs with >100 streams
 
 <p align="center">
-    <img src="images\Spotify_year_data_piechart_binnedsongs.png" height="300"><br>
+    <img src="images\Spotify_year_data_piechart_binnedsongs.PNG" height="300"><br>
 </p>
 
 **Metrics**:<br>
@@ -83,7 +83,7 @@ As can be seen in the chart, the vast majority of tracks were streamed less than
 >   * N_Skips: Total number of N_Unfinished instances for each song
 >   * N_CompletedStreams: Number of streams - Number of Skips
 <p align="center">
-    <img src="images\v0_skipEquation.png" height="75"><br>
+    <img src="images\v0_skipEquation.PNG" height="75"><br>
     <em>The equation for the value of this metric</em>
 </p>
 
@@ -91,7 +91,7 @@ As can be seen in the chart, the vast majority of tracks were streamed less than
 The implementation of these metrics was a bit messy in this iteration and was simplified in my later SQL iteration, but it resulted in a successful algorithm which ranked my listening history at various numbers of streams. The output was mainly text-based, however, so later iterations of this project would focus on creating visuals to understand the data.
 <br><br>
 <p align="center">
-    <img src="images\Spotify_year_data_exampleResults.png" height="500"><br>
+    <img src="images\Spotify_year_data_exampleResults.PNG" height="500"><br>
     <em>A small excerpt of the output from this analysis</em>
 </p>
 
@@ -112,12 +112,12 @@ Finally, I did a bit of data cleaning to remove any duplicates and missing value
 In the end, I had a set of related datasets that each contained data on my listening history:
 <br><br>
 <p align="center">
-    <img src="images\v1_artistdf.png" height="300"><br>
+    <img src="images\v1_artistdf.PNG" height="300"><br>
     <em>Data frame containing artist information with the new genre information boxed</em>
 </p>
 
 <p align="center">
-    <img src="images\v1_trackdf.png" height="300"><br>
+    <img src="images\v1_trackdf.png" height="250"><br>
     <em>Data frame containing track information with the new duration information boxed</em>
 </p>
 
@@ -130,13 +130,13 @@ I used the datasets that I created while experimenting with SpotiPy in the v1.0 
 The first page offers an overview which shows the top genres over some period of time by number of streams, as well as a breakdown of the top songs within each genre. More information about each artist and track are included in tables on the same page:
 
 <p align="center">
-    <img src="images\v1_1_page1.png" height="600"><br>
+    <img src="images\v1_1_page1.PNG" width="1000"><br>
 </p>
 
 The second page has a ribbon chart which shows the most-streamed genres of each year:
 
 <p align="center">
-    <img src="images\v1_1_page2.png" height="600"><br>
+    <img src="images\v1_1_page2.PNG" width="1000"><br>
 </p>
 
 # V2.0: Customized Spotify API for Customizing Data Requests
@@ -148,7 +148,7 @@ I also experimented with customizing my own API to interact with Spotify's endpo
 The resulting datasets from this iteration allowed me to create a variation of the Power BI visualization that I had created earlier which would break down the past year's listening history (instead of the entire listening history). This dashboard is still a prototype and will be enhanced in the future.
 
 <p align="center">
-    <img src="images\v2_yearly_version.png" height="600"><br>
+    <img src="images\v2_yearly_version.PNG" width="1000"><br>
 </p>
 
 
@@ -194,22 +194,22 @@ The resulting datasets showing the top tracks and their scores are shown below a
 
 <br>
 <p align="center">
-    <img src="images\Spotify_year_data_top10.png" height="300">
-    <img src="images\v3_overallScore.png" height="200"><br>
+    <img src="images\Spotify_year_data_top10.PNG" height="300">
+    <img src="images\v3_overallScore.PNG" height="200"><br>
     <em><b>Top:</b> The top 10 songs according to my original analysis<br>
     <b>Bottom:</b> The top 10 songs according to my SQL analysis. Note the difference in the scores display and the resulting tracks.
     </em>
 </p>
 <br>
 <p align="center">
-    <img src="images\v0_bin6.png" height="250">
-    <img src="images\v0_bin3.png" height="250"><br>
+    <img src="images\v0_bin6.PNG" height="250">
+    <img src="images\v0_bin3.PNG" height="250"><br>
     <em><b>Left</b>: The top 15 songs in bin 6 (>100 streams) according to my original analysis<br>
     <b>Right</b>: The top 15 songs in bin 3 (26-50 streams) according to my original analysis
     </em>
 </p>
 <p align="center">
-    <img src="images\v3_bins6and3.png" height="350"><br>
+    <img src="images\v3_bins6and3.PNG" height="350"><br>
     <em>The top 10 songs according to my SQL analysis from bins 6 and 3. Note the difference in the scores display and the resulting tracks.<br>
     <b>Bin 6</b>: Over 100 streams<br>
     <b>Bin 3</b>: 26-50 streams
