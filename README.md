@@ -97,7 +97,7 @@ The implementation of these metrics was a bit messy in this iteration and was si
 
 # V1.0: Connecting to Spotify API Endpoints For More Information
 
-Earlier, I had requested a year's worth of listening data from Spoitify, but Spotify also has an option to request your entire listening history which includes more details about each individual stream (including track IDs). Spotify also has the option to request more information about tracks/artists/etc. via its API endpoints. Together, these prompted me to return to this project to fill in some gaps from the previous analysis.
+Earlier, I had requested a year's worth of listening data from Spotify, but Spotify also has an option to request your entire listening history which includes more details about each individual stream (including track IDs). Spotify also has the option to request more information about tracks/artists/etc. via its API endpoints. Together, these prompted me to return to this project to fill in some gaps from the previous analysis.
 
 With my entire listening data, I'd be able to see trends in my musical tastes as it developed over the years, and because the data included track IDs, I could request more track information. In particular, I now had a way to obtain track lengths and genres.
 
